@@ -75,12 +75,12 @@ class ImgUtil {
             return null;
         BitmapFactory.Options newOpts = new BitmapFactory.Options();
         //开始读入图片，此时把options.inJustDecodeBounds 设回true了
-        newOpts.inJustDecodeBounds = true;
-        Bitmap bitmap = BitmapFactory.decodeFile(srcPath, newOpts);//此时返回bm为空
+        newOpts.inJustDecodeBounds = false;
+        Bitmap bitmap = BitmapFactory.decodeFile(srcPath,newOpts);//此时返回bm为空
 
         newOpts.inJustDecodeBounds = false;
-        int w = newOpts.outWidth;
-        int h = newOpts.outHeight;
+        int w = bitmap.getWidth();
+        int h = bitmap.getHeight();
         //现在主流手机比较多是800*480分辨率，所以高和宽我们设置为
         float hh = 800f;//这里设置高度为800f
         float ww = 480f;//这里设置宽度为480f

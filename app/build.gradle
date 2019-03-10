@@ -16,6 +16,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -35,4 +40,7 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation 'com.squareup.okhttp3:okhttp:3.13.1'
     implementation 'com.squareup.okio:okio:2.2.2'
+    implementation files('libs/x86.zip')
+    implementation files('libs/armeabi-v7a.zip')
+    implementation files('libs/arm64-v8a.zip')
 }

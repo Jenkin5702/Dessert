@@ -47,7 +47,6 @@ public class Vitamio {
   @SuppressLint("NewApi")
   public static boolean isInitialized(Context ctx) {
     vitamioPackage = ctx.getPackageName();
-
     vitamioLibraryPath = ctx.getApplicationInfo().nativeLibraryDir + "/";
   	vitamioDataPath = ContextUtils.getDataDir(ctx) + "lib/";
     browserlibraryPath = ctx.getApplicationContext().getDir("libs", Context.MODE_PRIVATE).getPath();

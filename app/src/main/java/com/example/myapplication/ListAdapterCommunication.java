@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ public class ListAdapterCommunication extends BaseAdapter {
     private List<ItemBeanCommunication> list;
     private LayoutInflater inflater;
     private Context context;
+    private boolean favored=false;
 
     public ListAdapterCommunication(List<ItemBeanCommunication> list, Context context) {
         this.list = list;
@@ -52,11 +54,26 @@ public class ListAdapterCommunication extends BaseAdapter {
             viewHolder.time=convertView.findViewById(R.id.textView2);
             viewHolder.intro=convertView.findViewById(R.id.textView3);
             viewHolder.title=convertView.findViewById(R.id.textView4);
+            viewHolder.btnFavor=convertView.findViewById(R.id.imageButton3);
+
+            viewHolder.btnFavor.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(!favored){
+                        viewHolder.btnFavor.setImageResource(R.drawable.ic_star_accent_24dp);
+                        favored=true;
+                    }else{
+                        viewHolder.btnFavor.setImageResource(R.drawable.ic_star_black_24dp);
+                        favored=false;
+                    }
+                }
+            });
+            viewHolder.btnResend=convertView.findViewById(R.id.imageButton2);
+            viewHolder.btnComment=convertView.findViewById(R.id.imageButton);
             viewHolder.image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(context,ActivityNewPicture.class);
-                    context.startActivity(intent);
+
                 }
             });
             convertView.setTag(viewHolder);
@@ -74,11 +91,14 @@ public class ListAdapterCommunication extends BaseAdapter {
     }
 
     class ViewHolder{
-        ImageView portrait;
+        CircleImageView portrait;
         ImageView image;
         TextView time;
         TextView username;
         TextView intro;
         TextView title;
+        ImageButton btnFavor;
+        ImageButton btnComment;
+        ImageButton btnResend;
     }
 }
