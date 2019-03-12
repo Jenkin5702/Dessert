@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Dessert</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -9,4 +9,13 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <array name="settings">
+        <item>我的设备</item>
+        <item>联网设置</item>
+        <item>视频播放</item>
+        <item>缓存设置</item>
+        <item>账号与安全</item>
+        <item>检查更新</item>
+        <item>关于甜食系</item>
+    </array>
 </resources>

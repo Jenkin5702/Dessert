@@ -6,4 +6,9 @@
         android:orderInCategory="100"
         android:title="这是万能的测试按钮"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_search"
+        android:title="搜索"
+        android:icon="@drawable/ic_search_black_24dp"
+        app:showAsAction="ifRoom"/>
 </menu>

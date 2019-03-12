@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -78,6 +79,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             startActivity(new Intent(MainActivity.this,ContentVideo.class));
+        }else if(id==R.id.action_search){
+
+            startActivity(new Intent(MainActivity.this,ActivitySearch.class));
         }
         return super.onOptionsItemSelected(item);
     }
