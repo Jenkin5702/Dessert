@@ -27,7 +27,6 @@ import android.widget.ImageView;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Objects;
 
 public class ActivityNewPicture extends AppCompatActivity {
     Toolbar toolbar;
@@ -60,12 +59,7 @@ public class ActivityNewPicture extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar_new_picture);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         btnLocation=findViewById(R.id.btn_location);
@@ -74,46 +68,40 @@ public class ActivityNewPicture extends AppCompatActivity {
 //        imageView.setImageURI(Uri.parse(url));
 
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Bitmap bmp = getURLimage(url);
-                Message msg = new Message();
-                msg.what = 0;
-                msg.obj = bmp;
-                System.out.println("000");
-                handler.sendMessage(msg);
+        new Thread(() -> {
+            Bitmap bmp = getURLimage(url);
+            Message msg = new Message();
+            msg.what = 0;
+            msg.obj = bmp;
+            System.out.println("000");
+            handler.sendMessage(msg);
 
 
-                //定位相关
-                if (ActivityCompat.checkSelfPermission(ActivityNewPicture.this, Manifest.permission.ACCESS_FINE_LOCATION)
-                        != PackageManager.PERMISSION_GRANTED
-                        && ActivityCompat.checkSelfPermission(ActivityNewPicture.this, Manifest.permission.ACCESS_COARSE_LOCATION)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                    return;
-                }
-                Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                Message locationMsg=new Message();
-                locationMsg.obj=location.toString();
-                locateHandler.sendMessage(locationMsg);
+            //定位相关
+            if (ActivityCompat.checkSelfPermission(ActivityNewPicture.this, Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(ActivityNewPicture.this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
             }
+            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            Message locationMsg=new Message();
+            locationMsg.obj=location.toString();
+            locateHandler.sendMessage(locationMsg);
         }).start();
 
 
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        imageView.setOnClickListener(v -> {
 
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, REQUEST_CODE);
-            }
+            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(intent, REQUEST_CODE);
         });
     }
 
